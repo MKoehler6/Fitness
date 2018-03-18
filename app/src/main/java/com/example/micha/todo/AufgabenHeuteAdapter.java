@@ -33,12 +33,20 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
 
         private TextView mItemText1;
         private TextView mItemText2;
+        private TextView mItemText3;
+        private TextView mItemText4;
+        private TextView mItemText5;
 
         public ListViewHolder(View itemView) {
 
             super(itemView);
             mItemText1 = (TextView) itemView.findViewById(R.id.textzeile1);
             mItemText2 = (TextView) itemView.findViewById(R.id.textzeile2);
+            mItemText3 = (TextView) itemView.findViewById(R.id.textzeile7);
+            mItemText4 = (TextView) itemView.findViewById(R.id.textzeile6);
+            mItemText5 = (TextView) itemView.findViewById(R.id.textzeile5);
+
+
 
             itemView.setOnClickListener(this);
 
@@ -47,7 +55,9 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
         public void bindView(int position) {
             mItemText1.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibName());
             mItemText2.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibTurnusString() + "      " + MainActivity.tododb.readAufgabeUnerledigt().get(position).gibPositionString());
+            mItemText3.setText("5");
         }
+
 
         public void onClick(View view) {
             String id = MainActivity.tododb.readAufgabeUnerledigt().get(getPosition()).gibIDString();
