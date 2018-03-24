@@ -20,35 +20,4 @@
         android:layout_below="@+id/textzeile1"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:id="@+id/textzeile5"
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textzeile2"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:text="TextView"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/textzeile6"
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textzeile5"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/textzeile5"
-        android:text="TextView"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/textzeile7"
-        android:layout_width="@android:dimen/app_icon_size"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textzeile2"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/textzeile6"
-        android:text="TextView"
-        android:textSize="14sp" />
-
-
 </RelativeLayout>

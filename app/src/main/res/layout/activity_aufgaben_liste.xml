@@ -10,7 +10,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="AufgabenListe:"
+        android:text="@string/aufgabenliste"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -19,7 +19,7 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="kurzer Klick: nicht erledigt    langer Klick: löschen"
+        android:text="@string/AnweisungKlicken"
         android:textAlignment="center"
         android:textSize="12sp" />
 

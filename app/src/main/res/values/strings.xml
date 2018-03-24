@@ -2,5 +2,19 @@
     <string name="app_name">Fitness</string>
     <string name="saved">Gespeichert</string>
     <string name="deleted">Gelöscht</string>
+    <string name="aufgabenliste">AufgabenListe:</string>
+    <string name="AnweisungKlicken">kurzer Klick: nicht erledigt langer Klick: löschen</string>
+    <string name="heute_zu_erledigen">Heute zu erledigen:</string>
+    <string name="heute">Heute</string>
+    <string name="neue_aufgabe">Neue Aufgabe</string>
+    <string name="liste">Liste</string>
+    <string name="name_aufgabe">Name Aufgabe</string>
+    <string name="turnus">Turnus:</string>
+    <string name="taeglich">täglich</string>
+    <string name="_1d_pause"> 1d Pause</string>
+    <string name="_2d_pause"> 2d Pause</string>
+    <string name="_3d_pause"> 3d Pause</string>
+    <string name="mit_pausentagen"> mit Pausentagen</string>
+    <string name="speichern">Speichern</string>
 
 </resources>

@@ -11,11 +11,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_marginTop="30dp"
         android:layout_weight="1"
-        android:text="Neue Aufgabe"
+        android:text="@string/neue_aufgabe"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         tools:textSize="24sp" />
 
@@ -24,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:hint="Name Aufgabe"
+        android:hint="@string/name_aufgabe"
         android:inputType="textPersonName" />
 
     <TextView
@@ -32,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Turnus:" />
+        android:text="@string/turnus" />
 
     <RadioGroup
         android:id="@+id/radiogroup1"
@@ -48,21 +46,15 @@
             android:layout_weight="1"
             android:checked="false"
             android:duplicateParentState="false"
-            android:text=" täglich" />
+            android:text="@string/taeglich" />
 
         <RadioButton
             android:id="@+id/radioButton9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text=" X Tage" />
+            android:text="@string/mit_pausentagen" />
 
-        <RadioButton
-            android:id="@+id/radioButton10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=" 2x / Woche" />
 
     </RadioGroup>
 
@@ -71,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Mehrere Tage mit Pause:" />
+        android:text="@string/mit_pausentagen" />
 
     <RadioGroup
         android:id="@+id/rgpos"
@@ -85,21 +77,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text=" XOXO" />
+            android:text="@string/_1d_pause" />
 
         <RadioButton
             android:id="@+id/radioButton13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text=" XXOXXO" />
+            android:text="@string/_2d_pause" />
 
         <RadioButton
             android:id="@+id/radioButton14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text=" XXXOXXXO" />
+            android:text="@string/_3d_pause" />
     </RadioGroup>
 
     <Button
@@ -107,6 +99,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Speichern" />
+        android:text="@string/speichern" />
 
 </LinearLayout>

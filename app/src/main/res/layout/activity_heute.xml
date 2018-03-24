@@ -9,7 +9,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:text="Heute zu erledigen:"
+        android:text="@string/heute_zu_erledigen"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold" />
