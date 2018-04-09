@@ -9,15 +9,17 @@ public class Aufgabe {
     int id;
     String name;
     int turnus;
-    int pos;
+    int pausen;
     int erledigt;
+    String events;
 
-    public Aufgabe (int id, String name, int position, int turnus, int erledigt){
+    public Aufgabe (int id, String name, int pausen, int turnus, int erledigt, String events){
         this.id = id;
         this.name = name;
         this.turnus = turnus;
-        this.pos = position;
+        this.pausen = pausen;
         this.erledigt = erledigt;
+        this.events = events;
     }
 
     public String gibName(){
@@ -33,29 +35,71 @@ public class Aufgabe {
     public int gibTurnus(){
         return turnus;
     }
+
+    public String gibAnzahlInWoche() {
+        String[] arrEvents = events.split(";");
+        int zaehler = 0;
+        Datum datum = new Datum();
+        for (int i = 0; i < arrEvents.length; i++) {
+            String[] s = arrEvents[i].split(" ");
+            int woche = datum.gibWoche();
+            if (datum.gibTagInWoche() == 1) { //weil die Woche hier am Sonntag beginnt = Tag 1
+                woche = woche - 1;
+            }
+            if (Integer.parseInt(s[3]) == datum.gibJahr() & Integer.parseInt(s[1]) == datum.gibWoche()) {
+                zaehler++;
+            }
+        }
+        Integer meinInteger = new Integer(zaehler);
+        return meinInteger.toString();
+    }
+
+    public String gibAnzahlInMonat() {
+        String[] arrEvents = events.split(";");
+        int zaehler = 0;
+        Datum datum = new Datum();
+        for (int i = 0; i < arrEvents.length; i++) {
+            String[] s = arrEvents[i].split(" ");
+            if (Integer.parseInt(s[3]) == datum.gibJahr() & Integer.parseInt(s[2]) == datum.gibMonat()) {
+                zaehler++;
+            }
+        }
+        return String.valueOf(zaehler);
+    }
+
+    public String gibAnzahlInJahr() {
+        String[] arrEvents = events.split(";");
+        int zaehler = 0;
+        Datum datum = new Datum();
+        for (int i = 0; i < arrEvents.length; i++) {
+            String[] s = arrEvents[i].split(" ");
+            if (Integer.parseInt(s[3]) == datum.gibJahr()) {
+                zaehler++;
+            }
+        }
+        return String.valueOf(zaehler);
+    }
     public String gibTurnusString() {
         switch (turnus) {
             case 1:
                 return "täglich";
             case 2:
-                return "alle 2 Tage";
-            case 3:
-                return "2 mal pro Woche";
+                return "mit Pausen";
         }
         return "unbekannter Turnus";
     }
-    public String gibPositionString() {
-        switch (pos) {
+    public String gibPausenString() {
+        switch (pausen) {
             case 0:
                 return " ";
             case 1:
-                return "Anfang des Monats";
+                return "1 Tag Pause";
             case 2:
-                return "Mitte des Monats";
+                return "2 Tage Pause";
             case 3:
-                return "Ende des Monats";
+                return "3 Tage Pause";
         }
-        return "unbekannte Position";
+        return "unbekannte Pause";
     }
     public String gibErledigtString() {
         switch (erledigt) {

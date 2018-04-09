@@ -15,15 +15,16 @@ import java.util.List;
 
 public class ToDoDB  extends SQLiteOpenHelper{
 
-    public static final String TABLE_NAME = "todo";
+    public static final String TABLE_NAME = "todosport";
     public static final String COLNAME_TITLE = "title";
     public static final String _ID = "_id";
     public static final String COLNAME_ISDONE = "isDone";
     public static final String COLNAME_TURNUS = "turnus";
-    public static final String COLNAME_POSITION = "position";
+    public static final String COLNAME_PAUSEN = "pausen";
+    public static final String COLNAME_SAVEDEVENTS = "savedEvents";
 
     public  static final int DATABASE_VERSION = 1;
-    public static  final String DATABASE_NAME = "Todo.db";
+    public static  final String DATABASE_NAME = "TodoSport.db";
 
 
 
@@ -33,7 +34,8 @@ public class ToDoDB  extends SQLiteOpenHelper{
                     COLNAME_TITLE + " TEXT," +
                     COLNAME_ISDONE + " TINYINT(1)," +
                     COLNAME_TURNUS + " TINYINT(1)," +
-                    COLNAME_POSITION + " TINYINT(1)" + ")";
+                    COLNAME_PAUSEN + " TINYINT(1)," +
+                    COLNAME_SAVEDEVENTS + " TEXT" + ")";
 
     private static final String TABLE_TODO_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
@@ -66,9 +68,9 @@ public class ToDoDB  extends SQLiteOpenHelper{
     }
 
     /**public List<Aufgabe> getAll() {
-        //TODO
-        return new ArrayList<>();
-    }**/
+     //TODO
+     return new ArrayList<>();
+     }**/
 
     public Aufgabe createAufgabe(Aufgabe aufgabe){
         SQLiteDatabase database = this.getWritableDatabase();
@@ -86,12 +88,12 @@ public class ToDoDB  extends SQLiteOpenHelper{
             ArrayList<Aufgabe> result = new ArrayList<>();
 
             Cursor cursor = db.query(TABLE_NAME,
-                    new String[]{_ID, COLNAME_TITLE, COLNAME_POSITION, COLNAME_TURNUS, COLNAME_ISDONE},
+                    new String[]{_ID, COLNAME_TITLE, COLNAME_PAUSEN, COLNAME_TURNUS, COLNAME_ISDONE, COLNAME_SAVEDEVENTS},
                     null, null, null, null, COLNAME_TURNUS);
 
             try {
                 while (cursor.moveToNext()) {
-                    Aufgabe aufgabe = new Aufgabe(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4));
+                    Aufgabe aufgabe = new Aufgabe(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4), cursor.getString(5));
                     result.add(aufgabe);
                 }
 
@@ -120,12 +122,12 @@ public class ToDoDB  extends SQLiteOpenHelper{
             ArrayList<Aufgabe> result = new ArrayList<>();
 
             Cursor cursor = db.query(TABLE_NAME,
-                    new String[]{_ID, COLNAME_TITLE, COLNAME_POSITION, COLNAME_TURNUS, COLNAME_ISDONE},
+                    new String[]{_ID, COLNAME_TITLE, COLNAME_PAUSEN, COLNAME_TURNUS, COLNAME_ISDONE, COLNAME_SAVEDEVENTS},
                     where, whereArgs, null, null, COLNAME_TURNUS);
 
             try {
                 while (cursor.moveToNext()) {
-                    Aufgabe aufgabe = new Aufgabe(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4));
+                    Aufgabe aufgabe = new Aufgabe(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4), "2 14 4 18;4 14 4 18;7 14 3 18;3 13 3 18;2 12 3 18");
                     result.add(aufgabe);
                 }
 
@@ -140,13 +142,13 @@ public class ToDoDB  extends SQLiteOpenHelper{
         }
     }
 
-    public void insert(String name, int position, int turnus,  int erledigt){
+    public void insert(String name, int pausen, int turnus,  int erledigt){
         long rowId = -1;
         SQLiteDatabase database = this.getWritableDatabase();
         try {
             ContentValues values = new ContentValues();
             values.put(COLNAME_TITLE, name);
-            values.put(COLNAME_POSITION, position);
+            values.put(COLNAME_PAUSEN, pausen);
             values.put(COLNAME_TURNUS, turnus);
             values.put(COLNAME_ISDONE, erledigt);
 
@@ -208,7 +210,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
         try {
             ContentValues values = new ContentValues();
             values.put(COLNAME_ISDONE, 0);
-            String whereClause = COLNAME_TURNUS + " = ?" + " and " + COLNAME_POSITION + " =? ";
+            String whereClause = COLNAME_TURNUS + " = ?" + " and " + COLNAME_PAUSEN + " =? ";
             String[] whereArgs = { "3", "1" };
 
             return database.update(TABLE_NAME, values, whereClause, whereArgs);
@@ -223,7 +225,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
         try {
             ContentValues values = new ContentValues();
             values.put(COLNAME_ISDONE, 0);
-            String whereClause = COLNAME_TURNUS + " = ?" + " and " + COLNAME_POSITION + " =? ";
+            String whereClause = COLNAME_TURNUS + " = ?" + " and " + COLNAME_PAUSEN + " =? ";
             String[] whereArgs = { "3", "2" };
 
             return database.update(TABLE_NAME, values, whereClause, whereArgs);
@@ -238,7 +240,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
         try {
             ContentValues values = new ContentValues();
             values.put(COLNAME_ISDONE, 0);
-            String whereClause = COLNAME_TURNUS + " = ?" + " and " + COLNAME_POSITION + " =? ";
+            String whereClause = COLNAME_TURNUS + " = ?" + " and " + COLNAME_PAUSEN + " =? ";
             String[] whereArgs = { "3", "3" };
 
             return database.update(TABLE_NAME, values, whereClause, whereArgs);

@@ -16,5 +16,9 @@
     <string name="_3d_pause"> 3d Pause</string>
     <string name="mit_pausentagen"> mit Pausentagen</string>
     <string name="speichern">Speichern</string>
+    <string name="woche">Woche</string>
+    <string name="monat">Monat</string>
+    <string name="gesamt">gesamt</string>
+    <string name="jahr">Jahr</string>
 
 </resources>

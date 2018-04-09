@@ -21,7 +21,6 @@ public class NeueAufgabe extends Fragment implements View.OnClickListener {
     private EditText editTextName;
     private RadioButton radioButtonTurnus1;
     private RadioButton radioButtonTurnus2;
-    private RadioButton radioButtonTurnus3;
     private RadioButton radioButtonPos1;
     private RadioButton radioButtonPos2;
     private RadioButton radioButtonPos3;
@@ -30,7 +29,6 @@ public class NeueAufgabe extends Fragment implements View.OnClickListener {
     private Button btnSpeichern;
     boolean rBT1;
     boolean rBT2;
-    boolean rBT3;
     boolean rBP1;
     boolean rBP2;
     boolean rBP3;
@@ -74,21 +72,7 @@ public class NeueAufgabe extends Fragment implements View.OnClickListener {
             }
 
         });
-        radioButtonTurnus3 = view.findViewById(R.id.radioButton10);
-        radioButtonTurnus3.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    rBT3 = true;
-                    hideKeyboardFrom(getContext(), view);
-                    radioGroupPos.setVisibility(View.INVISIBLE);
-                    textViewPos.setVisibility(View.INVISIBLE);
-                } else {
-                    rBT3 = false;
-                }
-            }
 
-        });
         radioGroupPos = view.findViewById(R.id.rgpos);
         radioGroupPos.setVisibility(View.INVISIBLE);
         textViewPos = view.findViewById(R.id.textView4);
@@ -146,9 +130,6 @@ public class NeueAufgabe extends Fragment implements View.OnClickListener {
         }
         if (rBT2) {
             turn = 2;
-        }
-        if (rBT3) {
-            turn = 3;
         }
         if (rBP1){
             pos = 1;

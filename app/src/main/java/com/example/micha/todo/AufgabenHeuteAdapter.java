@@ -33,18 +33,18 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
 
         private TextView mItemText1;
         private TextView mItemText2;
-        private TextView mItemText3;
-        private TextView mItemText4;
         private TextView mItemText5;
+        private TextView mItemText6;
+        private TextView mItemText7;
 
         public ListViewHolder(View itemView) {
 
             super(itemView);
             mItemText1 = (TextView) itemView.findViewById(R.id.textzeile1);
             mItemText2 = (TextView) itemView.findViewById(R.id.textzeile2);
-            mItemText3 = (TextView) itemView.findViewById(R.id.textzeile7);
-            mItemText4 = (TextView) itemView.findViewById(R.id.textzeile6);
-            mItemText5 = (TextView) itemView.findViewById(R.id.textzeile5);
+            mItemText5 = (TextView) itemView.findViewById(R.id.textView8);
+            mItemText6 = (TextView) itemView.findViewById(R.id.textView9);
+            mItemText7 = (TextView) itemView.findViewById(R.id.textView10);
 
 
 
@@ -54,8 +54,14 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
 
         public void bindView(int position) {
             mItemText1.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibName());
-            mItemText2.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibTurnusString() + "      " + MainActivity.tododb.readAufgabeUnerledigt().get(position).gibPositionString());
-            mItemText3.setText("5");
+            if (MainActivity.tododb.readAufgabeUnerledigt().get(position).gibTurnus() == 1){
+                mItemText2.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibTurnusString());
+            } else {
+                mItemText2.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibPausenString());
+            }
+            mItemText5.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInWoche());
+            mItemText6.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInMonat());
+            mItemText7.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInJahr());
         }
 
 

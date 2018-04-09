@@ -49,7 +49,7 @@ public class AufgabenAdapter extends RecyclerView.Adapter {
 
         public void bindView(int position) {
             mItemText1.setText(MainActivity.tododb.readAufgabeAlle().get(position).gibName());
-            mItemText2.setText(MainActivity.tododb.readAufgabeAlle().get(position).gibErledigtString() + "   -   " + MainActivity.tododb.readAufgabeAlle().get(position).gibTurnusString() + "      " + MainActivity.tododb.readAufgabeAlle().get(position).gibPositionString());
+            mItemText2.setText(MainActivity.tododb.readAufgabeAlle().get(position).gibErledigtString() + "   -   " + MainActivity.tododb.readAufgabeAlle().get(position).gibTurnusString() + "      " + MainActivity.tododb.readAufgabeAlle().get(position).gibPausenString());
         }
 
 
