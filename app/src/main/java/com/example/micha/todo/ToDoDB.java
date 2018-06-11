@@ -67,10 +67,6 @@ public class ToDoDB  extends SQLiteOpenHelper{
         return myInstance;
     }
 
-    /**public List<Aufgabe> getAll() {
-        //TODO
-        return new ArrayList<>();
-    }**/
 
     public Aufgabe createAufgabe(Aufgabe aufgabe){
         SQLiteDatabase database = this.getWritableDatabase();

@@ -22,8 +22,6 @@ public class Heute extends Fragment {
         int tag = datum.gibTag();
         int monat = datum.gibMonat();
         int woche = datum.gibWoche();
-        //int monat = 9;
-        //int tag = 15;
 
         Context context = getActivity();
         SharedPreferences sharedPreferences1 = context.getSharedPreferences(PREF_TAG, Context.MODE_PRIVATE);

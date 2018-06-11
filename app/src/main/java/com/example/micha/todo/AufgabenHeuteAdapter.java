@@ -70,6 +70,5 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
             MainActivity.tododb.setDone(id);
             notifyItemRemoved(getPosition());
         }
-
     }
 }

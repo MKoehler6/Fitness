@@ -43,7 +43,7 @@ public class Aufgabe {
         for (int i = 0; i < arrEvents.length; i++) {
             String[] s = arrEvents[i].split(" ");
             int woche = datum.gibWoche();
-            if (datum.gibTagInWoche() == 1) { //weil die Woche hier am Sonntag beginnt = Tag 1
+            if (datum.gibTagInWoche() == 1) { // weil die Woche hier am Sonntag beginnt = Tag 1
                 woche = woche - 1;
             }
             if (Integer.parseInt(s[3]) == datum.gibJahr() & Integer.parseInt(s[1]) == datum.gibWoche()) {
