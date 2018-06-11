@@ -16,6 +16,7 @@ import java.util.List;
 public class ToDoDB  extends SQLiteOpenHelper{
 
     public static final String TABLE_NAME = "todosport";
+    public static final String COLNAME_TAG = "tag";
     public static final String COLNAME_TITLE = "title";
     public static final String _ID = "_id";
     public static final String COLNAME_ISDONE = "isDone";
@@ -36,6 +37,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
                     COLNAME_TURNUS + " TINYINT(1)," +
                     COLNAME_PAUSEN + " TINYINT(1)," +
                     COLNAME_SAVEDEVENTS + " TEXT" + ")";
+
 
     private static final String TABLE_TODO_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
 

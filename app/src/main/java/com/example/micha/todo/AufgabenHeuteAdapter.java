@@ -59,7 +59,7 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
             } else {
                 mItemText2.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibPausenString());
             }
-            mItemText5.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInWoche());
+            //mItemText5.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInWoche());
             mItemText6.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInMonat());
             mItemText7.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInJahr());
         }
@@ -67,7 +67,7 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
 
         public void onClick(View view) {
             String id = MainActivity.tododb.readAufgabeUnerledigt().get(getPosition()).gibIDString();
-            MainActivity.tododb.setDone(id);
+            //MainActivity.tododb.setDone(id);
             notifyItemRemoved(getPosition());
         }
 
