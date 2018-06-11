@@ -46,12 +46,38 @@ public class Aufgabe {
             if (datum.gibTagInWoche() == 1) { //weil die Woche hier am Sonntag beginnt = Tag 1
                 woche = woche - 1;
             }
-            if (Integer.parseInt(s[1]) == datum.gibWoche()) {
+            if (Integer.parseInt(s[3]) == datum.gibJahr() & Integer.parseInt(s[1]) == datum.gibWoche()) {
                 zaehler++;
             }
         }
         Integer meinInteger = new Integer(zaehler);
         return meinInteger.toString();
+    }
+
+    public String gibAnzahlInMonat() {
+        String[] arrEvents = events.split(";");
+        int zaehler = 0;
+        Datum datum = new Datum();
+        for (int i = 0; i < arrEvents.length; i++) {
+            String[] s = arrEvents[i].split(" ");
+            if (Integer.parseInt(s[3]) == datum.gibJahr() & Integer.parseInt(s[2]) == datum.gibMonat()) {
+                zaehler++;
+            }
+        }
+        return String.valueOf(zaehler);
+    }
+
+    public String gibAnzahlInJahr() {
+        String[] arrEvents = events.split(";");
+        int zaehler = 0;
+        Datum datum = new Datum();
+        for (int i = 0; i < arrEvents.length; i++) {
+            String[] s = arrEvents[i].split(" ");
+            if (Integer.parseInt(s[3]) == datum.gibJahr()) {
+                zaehler++;
+            }
+        }
+        return String.valueOf(zaehler);
     }
     public String gibTurnusString() {
         switch (turnus) {

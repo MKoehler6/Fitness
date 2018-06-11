@@ -127,7 +127,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
 
             try {
                 while (cursor.moveToNext()) {
-                    Aufgabe aufgabe = new Aufgabe(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4), "2 14 18;4 14 18;7 14 18");
+                    Aufgabe aufgabe = new Aufgabe(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4), "2 14 4 18;4 14 4 18;7 14 3 18;3 13 3 18;2 12 3 18");
                     result.add(aufgabe);
                 }
 

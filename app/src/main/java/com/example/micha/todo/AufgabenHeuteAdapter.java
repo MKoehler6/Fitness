@@ -34,6 +34,8 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
         private TextView mItemText1;
         private TextView mItemText2;
         private TextView mItemText5;
+        private TextView mItemText6;
+        private TextView mItemText7;
 
         public ListViewHolder(View itemView) {
 
@@ -41,6 +43,8 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
             mItemText1 = (TextView) itemView.findViewById(R.id.textzeile1);
             mItemText2 = (TextView) itemView.findViewById(R.id.textzeile2);
             mItemText5 = (TextView) itemView.findViewById(R.id.textView8);
+            mItemText6 = (TextView) itemView.findViewById(R.id.textView9);
+            mItemText7 = (TextView) itemView.findViewById(R.id.textView10);
 
 
 
@@ -56,6 +60,8 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
                 mItemText2.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibPausenString());
             }
             mItemText5.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInWoche());
+            mItemText6.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInMonat());
+            mItemText7.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInJahr());
         }
 
 
