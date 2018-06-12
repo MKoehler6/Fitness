@@ -1,5 +1,6 @@
 package com.example.micha.todo;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,9 +43,9 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
             super(itemView);
             mItemText1 = (TextView) itemView.findViewById(R.id.textzeile1);
             mItemText2 = (TextView) itemView.findViewById(R.id.textzeile2);
-            mItemText5 = (TextView) itemView.findViewById(R.id.textView8);
-            mItemText6 = (TextView) itemView.findViewById(R.id.textView9);
-            mItemText7 = (TextView) itemView.findViewById(R.id.textView10);
+            mItemText5 = (TextView) itemView.findViewById(R.id.textView11);
+            mItemText6 = (TextView) itemView.findViewById(R.id.textView12);
+            mItemText7 = (TextView) itemView.findViewById(R.id.textView13);
 
 
 
@@ -62,6 +63,7 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
             mItemText5.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInWoche());
             mItemText6.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInMonat());
             mItemText7.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInJahr());
+            mItemText7.setTextColor(Color.BLUE);
         }
 
 
