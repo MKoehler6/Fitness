@@ -42,10 +42,19 @@ public class Datum {
     int gibTagInWoche() { return tagInWoche; }
 
     int gibJahr() { return jahr % 100; }
+
+    String gibWocheString() {
+        return ((Integer)woche).toString();
+    }
+    String gibJahrString() {
+        return ((Integer)gibJahr()).toString();
+    }
     String gibTagString() {
         return ((Integer)tag).toString();
     }
     String gibMonatString() {
-        return ((Integer)monat).toString();
+        return ((Integer)gibMonat()).toString();
+    }
+    String gibTagInWocheString() { return ((Integer)tagInWoche).toString();
     }
 }

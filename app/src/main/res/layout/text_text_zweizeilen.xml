@@ -21,7 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textzeile1"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/textView5"

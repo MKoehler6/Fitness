@@ -66,7 +66,7 @@ public class NeueAufgabe extends Fragment {
                     pos = 3;
                 }
 
-                toDoDB.insert(editTextName.getText().toString(), pos, turn, 0, "6 23 6 18;13 24 6 18;14 24 6 18");
+                toDoDB.insert(editTextName.getText().toString(), pos, turn, 0, "100 100 100 100");
 
                 Toast.makeText(getContext(), R.string.saved, Toast.LENGTH_SHORT).show();
 

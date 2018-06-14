@@ -44,12 +44,18 @@ public class AufgabenAdapter extends RecyclerView.Adapter {
 
         private TextView mItemText1;
         private TextView mItemText2;
+        private TextView mItemText5;
+        private TextView mItemText6;
+        private TextView mItemText7;
 
         public ListViewHolder(View itemView) {
 
             super(itemView);
             mItemText1 = (TextView) itemView.findViewById(R.id.textzeile1);
             mItemText2 = (TextView) itemView.findViewById(R.id.textzeile2);
+            mItemText5 = (TextView) itemView.findViewById(R.id.textView11);
+            mItemText6 = (TextView) itemView.findViewById(R.id.textView12);
+            mItemText7 = (TextView) itemView.findViewById(R.id.textView13);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -58,7 +64,15 @@ public class AufgabenAdapter extends RecyclerView.Adapter {
 
         public void bindView(int position) {
             mItemText1.setText(toDoDB.readAufgabeAlle().get(position).gibName());
-            mItemText2.setText(toDoDB.readAufgabeAlle().get(position).gibErledigtString() + "   -   " + toDoDB.readAufgabeAlle().get(position).gibTurnusString() + "      " + toDoDB.readAufgabeAlle().get(position).gibPausenString());
+            if (toDoDB.readAufgabeAlle().get(position).gibTurnusString() == "täglich") {
+                mItemText2.setText(toDoDB.readAufgabeAlle().get(position).gibErledigtString() + "   -   " + toDoDB.readAufgabeAlle().get(position).gibTurnusString() + "      " + toDoDB.readAufgabeAlle().get(position).gibPausenString());
+
+            } else {
+                mItemText2.setText(toDoDB.readAufgabeAlle().get(position).gibErledigtString() + "   -   " + toDoDB.readAufgabeAlle().get(position).gibPausenString());
+            }
+            mItemText5.setText(toDoDB.readAufgabeAlle().get(position).gibAnzahlInWoche());
+            mItemText6.setText(toDoDB.readAufgabeAlle().get(position).gibAnzahlInMonat());
+            mItemText7.setText(toDoDB.readAufgabeAlle().get(position).gibAnzahlInJahr());
         }
 
 

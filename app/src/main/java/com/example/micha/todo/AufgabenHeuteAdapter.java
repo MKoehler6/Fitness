@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
 
     ToDoDB toDoDB;
+    Datum datum = new Datum();
 
     AufgabenHeuteAdapter(ToDoDB toDoDB) {
         this.toDoDB = toDoDB;
@@ -70,14 +71,17 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
             mItemText5.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInWoche());
             mItemText6.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInMonat());
             mItemText7.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInJahr());
-            mItemText7.setTextColor(Color.BLUE);
+            //mItemText7.setTextColor(Color.BLUE);
         }
 
         public void onClick(View view) {
             String id = toDoDB.readAufgabeUnerledigt().get(getAdapterPosition()).gibIDString();
+
+            String alt = toDoDB.readAufgabeUnerledigt().get(getAdapterPosition()).events;
+            String dateNeu = alt + ";" + datum.gibTagInWocheString() + " " + datum.gibWocheString() + " " + datum.gibMonatString() + " " + datum.gibJahrString();
+            toDoDB.setDate(id, dateNeu);
             toDoDB.setDone(id);
             notifyItemRemoved(getAdapterPosition());
-            //toDoDB.insert("Meditation", 1, 2, 0, "24 14 2018");
         }
     }
 }

@@ -170,6 +170,21 @@ public class ToDoDB  extends SQLiteOpenHelper{
             database.close();
         }
     }
+    public int setDate(String id, String date) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        try {
+            ContentValues values = new ContentValues();
+            values.put(COLNAME_SAVEDEVENTS, date);
+            String whereClause = _ID + " = ?";
+            String[] whereArgs = { id };
+
+            return database.update(TABLE_NAME, values, whereClause, whereArgs);
+
+        } finally {
+            database.close();
+        }
+    }
     public int setUndone(String id) {
         SQLiteDatabase database = this.getWritableDatabase();
 
