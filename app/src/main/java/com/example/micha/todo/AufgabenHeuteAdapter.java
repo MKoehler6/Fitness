@@ -2,6 +2,7 @@ package com.example.micha.todo;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,12 @@ import android.widget.TextView;
  */
 
 public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
+
+    ToDoDB toDoDB;
+
+    AufgabenHeuteAdapter(ToDoDB toDoDB) {
+        this.toDoDB = toDoDB;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,7 +34,7 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return MainActivity.tododb.readAufgabeUnerledigt().size();
+        return toDoDB.readAufgabeUnerledigt().size();
     }
 
     private class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -54,23 +61,23 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
         }
 
         public void bindView(int position) {
-            mItemText1.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibName());
-            if (MainActivity.tododb.readAufgabeUnerledigt().get(position).gibTurnus() == 1){
-                mItemText2.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibTurnusString());
+            mItemText1.setText(toDoDB.readAufgabeUnerledigt().get(position).gibName());
+            if (toDoDB.readAufgabeUnerledigt().get(position).gibTurnus() == 1){
+                mItemText2.setText(toDoDB.readAufgabeUnerledigt().get(position).gibTurnusString());
             } else {
-                mItemText2.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibPausenString());
+                mItemText2.setText(toDoDB.readAufgabeUnerledigt().get(position).gibPausenString());
             }
-            mItemText5.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInWoche());
-            mItemText6.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInMonat());
-            mItemText7.setText(MainActivity.tododb.readAufgabeUnerledigt().get(position).gibAnzahlInJahr());
+            mItemText5.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInWoche());
+            mItemText6.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInMonat());
+            mItemText7.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInJahr());
             mItemText7.setTextColor(Color.BLUE);
         }
 
-
         public void onClick(View view) {
-            String id = MainActivity.tododb.readAufgabeUnerledigt().get(getPosition()).gibIDString();
-            MainActivity.tododb.setDone(id);
-            notifyItemRemoved(getPosition());
+            String id = toDoDB.readAufgabeUnerledigt().get(getAdapterPosition()).gibIDString();
+            toDoDB.setDone(id);
+            notifyItemRemoved(getAdapterPosition());
+            //toDoDB.insert("Meditation", 1, 2, 0, "24 14 2018");
         }
     }
 }

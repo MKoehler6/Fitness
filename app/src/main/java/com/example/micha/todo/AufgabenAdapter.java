@@ -1,5 +1,6 @@
 package com.example.micha.todo;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,14 @@ import android.widget.Toast;
  */
 
 public class AufgabenAdapter extends RecyclerView.Adapter {
+
+    ToDoDB toDoDB;
+    Context context;
+
+    AufgabenAdapter(ToDoDB toDoDB, Context context) {
+        this.toDoDB = toDoDB;
+        this.context = context;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -28,7 +37,7 @@ public class AufgabenAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return MainActivity.tododb.readAufgabeAlle().size();
+        return toDoDB.readAufgabeAlle().size();
     }
 
     private class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
@@ -48,20 +57,20 @@ public class AufgabenAdapter extends RecyclerView.Adapter {
         }
 
         public void bindView(int position) {
-            mItemText1.setText(MainActivity.tododb.readAufgabeAlle().get(position).gibName());
-            mItemText2.setText(MainActivity.tododb.readAufgabeAlle().get(position).gibErledigtString() + "   -   " + MainActivity.tododb.readAufgabeAlle().get(position).gibTurnusString() + "      " + MainActivity.tododb.readAufgabeAlle().get(position).gibPausenString());
+            mItemText1.setText(toDoDB.readAufgabeAlle().get(position).gibName());
+            mItemText2.setText(toDoDB.readAufgabeAlle().get(position).gibErledigtString() + "   -   " + toDoDB.readAufgabeAlle().get(position).gibTurnusString() + "      " + toDoDB.readAufgabeAlle().get(position).gibPausenString());
         }
 
 
         public void onClick(View view) {
-            String id = MainActivity.tododb.readAufgabeAlle().get(getPosition()).gibIDString();
-            MainActivity.tododb.setUndone(id);
+            String id = toDoDB.readAufgabeAlle().get(getPosition()).gibIDString();
+            toDoDB.setUndone(id);
             notifyItemChanged(getPosition());
         }
         public boolean onLongClick(View view) {
-            String id = MainActivity.tododb.readAufgabeAlle().get(getPosition()).gibIDString();
-            MainActivity.tododb.delete(id);
-            Toast.makeText(AufgabenListe.context, R.string.deleted, Toast.LENGTH_SHORT).show();
+            String id = toDoDB.readAufgabeAlle().get(getPosition()).gibIDString();
+            toDoDB.delete(id);
+            Toast.makeText(context, R.string.deleted, Toast.LENGTH_SHORT).show();
             notifyItemRemoved(getPosition());
             return true;
         }

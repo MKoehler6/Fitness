@@ -11,15 +11,18 @@ import android.view.ViewGroup;
 
 public class AufgabenListe extends Fragment {
 
-    public static Context context;
+    //public static Context context;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Context context = getActivity();
+        ToDoDB toDoDB = new ToDoDB(context);
 
         View view = inflater.inflate(R.layout.activity_aufgaben_liste, container, false);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.RecyclerAufgabenListe);
 
-        AufgabenAdapter adapter = new AufgabenAdapter();
+        AufgabenAdapter adapter = new AufgabenAdapter(toDoDB, context);
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);

@@ -1,5 +1,6 @@
 package com.example.micha.todo;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,14 +8,12 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
     static String PREF_NAME = "pref_name";
-    public static ToDoDB tododb;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        tododb = new ToDoDB(this);
 
         Heute fragmentHeute = new Heute();
         android.app.FragmentManager fragmentManager = getFragmentManager();

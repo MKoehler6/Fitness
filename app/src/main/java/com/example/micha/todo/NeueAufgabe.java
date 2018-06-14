@@ -16,7 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class NeueAufgabe extends Fragment implements View.OnClickListener {
+public class NeueAufgabe extends Fragment {
 
     private EditText editTextName;
     private RadioButton radioButtonTurnus1;
@@ -35,12 +35,50 @@ public class NeueAufgabe extends Fragment implements View.OnClickListener {
     int turn;
     int pos = 0;
 
+
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Context context = getActivity();
+        final ToDoDB toDoDB = new ToDoDB(context);
+
 
         final View view = inflater.inflate(R.layout.activity_neue_aufgabe, container, false);
 
         btnSpeichern = view.findViewById(R.id.speichern);
-        btnSpeichern.setOnClickListener(this);
+        btnSpeichern.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (rBT1){
+                    turn = 1;
+                }
+                if (rBT2) {
+                    turn = 2;
+                }
+                if (rBP1){
+                    pos = 1;
+                }
+                if (rBP2) {
+                    pos = 2;
+                }
+                if (rBP3) {
+                    pos = 3;
+                }
+
+                toDoDB.insert(editTextName.getText().toString(), pos, turn, 0, "6 23 6 18;13 24 6 18;14 24 6 18");
+
+                Toast.makeText(getContext(), R.string.saved, Toast.LENGTH_SHORT).show();
+
+                hideKeyboardFrom(getContext(), v);
+
+                Heute fragmentHeute = new Heute();
+                android.app.FragmentManager fragmentManager = getFragmentManager();
+                android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentPlatzhalter, fragmentHeute);
+                fragmentTransaction.commit();
+            }
+        });
         editTextName = view.findViewById(R.id.editText);
         radioButtonTurnus1 = view.findViewById(R.id.radioButton);
         radioButtonTurnus1.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener() {
@@ -121,41 +159,11 @@ public class NeueAufgabe extends Fragment implements View.OnClickListener {
 
     }
 
-
-    @Override
-    public void onClick(View v) {
-
-        if (rBT1){
-            turn = 1;
-        }
-        if (rBT2) {
-            turn = 2;
-        }
-        if (rBP1){
-            pos = 1;
-        }
-        if (rBP2) {
-            pos = 2;
-        }
-        if (rBP3) {
-            pos = 3;
-        }
-        MainActivity.tododb.insert(editTextName.getText().toString(), pos, turn, 0);
-
-        Toast.makeText(getContext(), R.string.saved, Toast.LENGTH_SHORT).show();
-
-        hideKeyboardFrom(getContext(), v);
-
-        Heute fragmentHeute = new Heute();
-        android.app.FragmentManager fragmentManager = getFragmentManager();
-        android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentPlatzhalter, fragmentHeute);
-        fragmentTransaction.commit();
-
-    }
     public static void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+
 
 }

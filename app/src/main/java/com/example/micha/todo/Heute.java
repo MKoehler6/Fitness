@@ -24,6 +24,8 @@ public class Heute extends Fragment {
         int woche = datum.gibWoche();
 
         Context context = getActivity();
+        ToDoDB toDoDB = new ToDoDB(context);
+
         SharedPreferences sharedPreferences1 = context.getSharedPreferences(PREF_TAG, Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences2 = context.getSharedPreferences(PREF_MONAT, Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences3 = context.getSharedPreferences(PREF_WOCHE, Context.MODE_PRIVATE);
@@ -37,9 +39,9 @@ public class Heute extends Fragment {
             editor1.putInt(PREF_TAG, tag);
             editor2.putInt(PREF_MONAT, monat);
             editor3.putInt(PREF_WOCHE, woche);
-            editor1.commit();
-            editor2.commit();
-            editor3.commit();
+            editor1.apply();
+            editor2.apply();
+            editor3.apply();
             savedTag = sharedPreferences1.getInt(PREF_TAG, 0);
             savedMonat = sharedPreferences2.getInt(PREF_MONAT, 0);
             savedWoche = sharedPreferences3.getInt(PREF_WOCHE, 0);
@@ -49,12 +51,12 @@ public class Heute extends Fragment {
             editor1.commit();
             savedTag = sharedPreferences1.getInt(PREF_TAG, 0);
 
-            MainActivity.tododb.setDailyUndone();
+            toDoDB.setDailyUndone();
             if (tag > 10 & tag < 21) {
-                MainActivity.tododb.setMonthlyUndone2();
+                toDoDB.setMonthlyUndone2();
             }
             if (tag > 20 & tag < 32) {
-                MainActivity.tododb.setMonthlyUndone3();
+                toDoDB.setMonthlyUndone3();
             }
         }
 
@@ -63,20 +65,20 @@ public class Heute extends Fragment {
             editor2.commit();
             savedMonat = sharedPreferences2.getInt(PREF_MONAT, 0);
 
-            MainActivity.tododb.setMonthlyUndone1();
+            toDoDB.setMonthlyUndone1();
         }
         if (savedWoche != woche) {
             editor3.putInt(PREF_WOCHE, woche);
             editor3.commit();
             savedWoche = sharedPreferences3.getInt(PREF_WOCHE, 0);
 
-            MainActivity.tododb.setWeeklyUndone();
+            toDoDB.setWeeklyUndone();
         }
 
         View view = inflater.inflate(R.layout.activity_heute, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.RecyclerAufgabenListeHeute);
 
-        AufgabenHeuteAdapter adapter = new AufgabenHeuteAdapter();
+        AufgabenHeuteAdapter adapter = new AufgabenHeuteAdapter(toDoDB);
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
