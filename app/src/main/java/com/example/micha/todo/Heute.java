@@ -6,15 +6,22 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Heute extends Fragment {
 
     static String PREF_TAG = "tag";
     static String PREF_MONAT = "monat";
     static String PREF_WOCHE = "woche";
+     List<Aufgabe> aufgaben;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -25,6 +32,8 @@ public class Heute extends Fragment {
 
         Context context = getActivity();
         ToDoDB toDoDB = new ToDoDB(context);
+
+        aufgaben = toDoDB.readAufgabeAlle();
 
         SharedPreferences sharedPreferences1 = context.getSharedPreferences(PREF_TAG, Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences2 = context.getSharedPreferences(PREF_MONAT, Context.MODE_PRIVATE);
@@ -49,30 +58,16 @@ public class Heute extends Fragment {
         if (savedTag != tag | savedMonat != monat) {
             editor1.putInt(PREF_TAG, tag);
             editor1.commit();
-            savedTag = sharedPreferences1.getInt(PREF_TAG, 0);
-
             toDoDB.setDailyUndone();
-            if (tag > 10 & tag < 21) {
-                toDoDB.setMonthlyUndone2();
+            for (int i=0; i < aufgaben.size(); i++) {
+                int tage = aufgaben.get(i).tageVergangen();
+                if (tage % 4 == 0 & aufgaben.get(i).gibPausenString() == "3") {
+                    toDoDB.setUndone(aufgaben.get(i).gibIDString());
+                }
+                if (tage % 3 == 0 & aufgaben.get(i).gibPausenString() == "2") {
+                    toDoDB.setUndone(aufgaben.get(i).gibIDString());
+                }
             }
-            if (tag > 20 & tag < 32) {
-                toDoDB.setMonthlyUndone3();
-            }
-        }
-
-        if (savedMonat != monat) {
-            editor2.putInt(PREF_MONAT, monat);
-            editor2.commit();
-            savedMonat = sharedPreferences2.getInt(PREF_MONAT, 0);
-
-            toDoDB.setMonthlyUndone1();
-        }
-        if (savedWoche != woche) {
-            editor3.putInt(PREF_WOCHE, woche);
-            editor3.commit();
-            savedWoche = sharedPreferences3.getInt(PREF_WOCHE, 0);
-
-            toDoDB.setWeeklyUndone();
         }
 
         View view = inflater.inflate(R.layout.activity_heute, container, false);

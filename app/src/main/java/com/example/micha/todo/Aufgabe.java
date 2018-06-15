@@ -1,5 +1,8 @@
 package com.example.micha.todo;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 /**
  * Created by Michael on 09.12.2017.
  */
@@ -12,6 +15,7 @@ public class Aufgabe {
     int pausen;
     int erledigt;
     String events;
+    LocalDate startDatum;
 
     public Aufgabe (int id, String name, int pausen, int turnus, int erledigt, String events){
         this.id = id;
@@ -20,6 +24,7 @@ public class Aufgabe {
         this.pausen = pausen;
         this.erledigt = erledigt;
         this.events = events;
+
     }
 
     public String gibName(){
@@ -40,7 +45,7 @@ public class Aufgabe {
         String[] arrEvents = events.split(";");
         int zaehler = 0;
         Datum datum = new Datum();
-        for (int i = 0; i < arrEvents.length; i++) {
+        for (int i = 1; i < arrEvents.length; i++) {
             String[] s = arrEvents[i].split(" ");
             int woche = datum.gibWoche();
             if (datum.gibTagInWoche() == 1) { // weil die Woche hier am Sonntag beginnt = Tag 1
@@ -58,7 +63,7 @@ public class Aufgabe {
         String[] arrEvents = events.split(";");
         int zaehler = 0;
         Datum datum = new Datum();
-        for (int i = 0; i < arrEvents.length; i++) {
+        for (int i = 1; i < arrEvents.length; i++) {
             String[] s = arrEvents[i].split(" ");
             if (Integer.parseInt(s[3]) == datum.gibJahr() & Integer.parseInt(s[2]) == datum.gibMonat()) {
                 zaehler++;
@@ -71,7 +76,7 @@ public class Aufgabe {
         String[] arrEvents = events.split(";");
         int zaehler = 0;
         Datum datum = new Datum();
-        for (int i = 0; i < arrEvents.length; i++) {
+        for (int i = 1; i < arrEvents.length; i++) {
             String[] s = arrEvents[i].split(" ");
             if (Integer.parseInt(s[3]) == datum.gibJahr()) {
                 zaehler++;
@@ -79,6 +84,26 @@ public class Aufgabe {
         }
         return String.valueOf(zaehler);
     }
+
+    public LocalDate gibStartDatum() {
+        String[] arrEvents = events.split(";");
+        String[] s = arrEvents[0].split(" ");
+        int jahr = (Integer.parseInt(s[2]));
+        int monat = (Integer.parseInt(s[1]));
+        int tag = (Integer.parseInt(s[0]));
+        startDatum = LocalDate.of(jahr, monat, tag);
+        return startDatum;
+    }
+
+    public int tageVergangen() {
+        int tage = Period.between(gibStartDatum(), LocalDate.now()).getDays();
+        return tage;
+    }
+
+    public String tageVergangenString() {
+        return ((Integer) tageVergangen()).toString();
+    }
+
     public String gibTurnusString() {
         switch (turnus) {
             case 1:

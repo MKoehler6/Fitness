@@ -69,6 +69,7 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
                 mItemText2.setText(toDoDB.readAufgabeUnerledigt().get(position).gibPausenString());
             }
             mItemText5.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInWoche());
+            //mItemText5.setText(toDoDB.readAufgabeUnerledigt().get(position).tageVergangenString());
             mItemText6.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInMonat());
             mItemText7.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInJahr());
             //mItemText7.setTextColor(Color.BLUE);

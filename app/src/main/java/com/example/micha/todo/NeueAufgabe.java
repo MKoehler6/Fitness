@@ -16,14 +16,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.time.LocalDate;
+import java.util.GregorianCalendar;
+
 public class NeueAufgabe extends Fragment {
 
     private EditText editTextName;
     private RadioButton radioButtonTurnus1;
     private RadioButton radioButtonTurnus2;
-    private RadioButton radioButtonPos1;
-    private RadioButton radioButtonPos2;
-    private RadioButton radioButtonPos3;
+    private RadioButton radioButtonPause1;
+    private RadioButton radioButtonPause2;
+    private RadioButton radioButtonPause3;
     private TextView textViewPos;
     private RadioGroup radioGroupPos;
     private Button btnSpeichern;
@@ -33,16 +36,19 @@ public class NeueAufgabe extends Fragment {
     boolean rBP2;
     boolean rBP3;
     int turn;
-    int pos = 0;
+    int pause = 0;
 
-
+    Datum datum = new Datum();
+    int tag = datum.gibTag();
+    int monat = datum.gibMonat();
+    int jahr = datum.gibJahr();
+    String aktDatum = "" + tag + " " + monat + " " + jahr;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Context context = getActivity();
         final ToDoDB toDoDB = new ToDoDB(context);
-
 
         final View view = inflater.inflate(R.layout.activity_neue_aufgabe, container, false);
 
@@ -57,16 +63,16 @@ public class NeueAufgabe extends Fragment {
                     turn = 2;
                 }
                 if (rBP1){
-                    pos = 1;
+                    pause = 1;
                 }
                 if (rBP2) {
-                    pos = 2;
+                    pause = 2;
                 }
                 if (rBP3) {
-                    pos = 3;
+                    pause = 3;
                 }
 
-                toDoDB.insert(editTextName.getText().toString(), pos, turn, 0, "100 100 100 100");
+                toDoDB.insert(editTextName.getText().toString(), pause, turn, 0, aktDatum);
 
                 Toast.makeText(getContext(), R.string.saved, Toast.LENGTH_SHORT).show();
 
@@ -115,8 +121,8 @@ public class NeueAufgabe extends Fragment {
         radioGroupPos.setVisibility(View.INVISIBLE);
         textViewPos = view.findViewById(R.id.textView4);
         textViewPos.setVisibility(View.INVISIBLE);
-        radioButtonPos1 = view.findViewById(R.id.radioButton12);
-        radioButtonPos1.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener() {
+        radioButtonPause1 = view.findViewById(R.id.radioButton12);
+        radioButtonPause1.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -127,8 +133,8 @@ public class NeueAufgabe extends Fragment {
             }
 
         });
-        radioButtonPos2 = view.findViewById(R.id.radioButton13);
-        radioButtonPos2.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener() {
+        radioButtonPause2 = view.findViewById(R.id.radioButton13);
+        radioButtonPause2.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -139,8 +145,8 @@ public class NeueAufgabe extends Fragment {
             }
 
         });
-        radioButtonPos3 = view.findViewById(R.id.radioButton14);
-        radioButtonPos3.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener() {
+        radioButtonPause3 = view.findViewById(R.id.radioButton14);
+        radioButtonPause3.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -151,9 +157,6 @@ public class NeueAufgabe extends Fragment {
             }
 
         });
-
-        //MainActivity.tododb.insert("DB Aufgabe täglich", 1, 1, 0);
-        //MainActivity.tododb.insert("DB Aufgabe2 täglich", 1, 1, 0);
 
         return view;
 

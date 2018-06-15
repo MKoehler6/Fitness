@@ -106,11 +106,8 @@ public class ToDoDB  extends SQLiteOpenHelper{
 
     public List<Aufgabe> readAufgabeUnerledigt(){
         SQLiteDatabase db = this.getReadableDatabase();
-        //String nameAufgabe = new String();
 
         try {
-            //String where = COLNAME_ISDONE + " = ?" + " OR " + COLNAME_ISDONE + " = ?";
-            //String[] whereArgs = { "0", "1" };
 
             String where = COLNAME_ISDONE + " = ?";
             String[] whereArgs = { "0" };
@@ -209,66 +206,6 @@ public class ToDoDB  extends SQLiteOpenHelper{
             values.put(COLNAME_ISDONE, 0);
             String whereClause = COLNAME_TURNUS + " = ?";
             String[] whereArgs = { "1" };
-
-            return database.update(TABLE_NAME, values, whereClause, whereArgs);
-
-        } finally {
-            database.close();
-        }
-    }
-    public int setMonthlyUndone1() {
-        SQLiteDatabase database = this.getWritableDatabase();
-
-        try {
-            ContentValues values = new ContentValues();
-            values.put(COLNAME_ISDONE, 0);
-            String whereClause = COLNAME_TURNUS + " = ?" + " and " + COLNAME_PAUSEN + " =? ";
-            String[] whereArgs = { "3", "1" };
-
-            return database.update(TABLE_NAME, values, whereClause, whereArgs);
-
-        } finally {
-            database.close();
-        }
-    }
-    public int setMonthlyUndone2() {
-        SQLiteDatabase database = this.getWritableDatabase();
-
-        try {
-            ContentValues values = new ContentValues();
-            values.put(COLNAME_ISDONE, 0);
-            String whereClause = COLNAME_TURNUS + " = ?" + " and " + COLNAME_PAUSEN + " =? ";
-            String[] whereArgs = { "3", "2" };
-
-            return database.update(TABLE_NAME, values, whereClause, whereArgs);
-
-        } finally {
-            database.close();
-        }
-    }
-    public int setMonthlyUndone3() {
-        SQLiteDatabase database = this.getWritableDatabase();
-
-        try {
-            ContentValues values = new ContentValues();
-            values.put(COLNAME_ISDONE, 0);
-            String whereClause = COLNAME_TURNUS + " = ?" + " and " + COLNAME_PAUSEN + " =? ";
-            String[] whereArgs = { "3", "3" };
-
-            return database.update(TABLE_NAME, values, whereClause, whereArgs);
-
-        } finally {
-            database.close();
-        }
-    }
-    public int setWeeklyUndone() {
-        SQLiteDatabase database = this.getWritableDatabase();
-
-        try {
-            ContentValues values = new ContentValues();
-            values.put(COLNAME_ISDONE, 0);
-            String whereClause = COLNAME_TURNUS + " = ?";
-            String[] whereArgs = { "2" };
 
             return database.update(TABLE_NAME, values, whereClause, whereArgs);
 
