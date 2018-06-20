@@ -67,6 +67,9 @@ public class Heute extends Fragment {
                 if (tage % 3 == 0 & aufgaben.get(i).gibPausenString() == "2") {
                     toDoDB.setUndone(aufgaben.get(i).gibIDString());
                 }
+                if (tage % 2 == 0 & aufgaben.get(i).gibPausenString() == "1") {
+                    toDoDB.setUndone(aufgaben.get(i).gibIDString());
+                }
             }
         }
 

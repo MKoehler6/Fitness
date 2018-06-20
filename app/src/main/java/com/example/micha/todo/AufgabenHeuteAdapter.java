@@ -55,8 +55,6 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
             mItemText6 = (TextView) itemView.findViewById(R.id.textView12);
             mItemText7 = (TextView) itemView.findViewById(R.id.textView13);
 
-
-
             itemView.setOnClickListener(this);
 
         }
@@ -69,10 +67,8 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
                 mItemText2.setText(toDoDB.readAufgabeUnerledigt().get(position).gibPausenString());
             }
             mItemText5.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInWoche());
-            //mItemText5.setText(toDoDB.readAufgabeUnerledigt().get(position).tageVergangenString());
             mItemText6.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInMonat());
             mItemText7.setText(toDoDB.readAufgabeUnerledigt().get(position).gibAnzahlInJahr());
-            //mItemText7.setTextColor(Color.BLUE);
         }
 
         public void onClick(View view) {
