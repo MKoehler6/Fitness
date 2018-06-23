@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +24,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
     public static final String COLNAME_TURNUS = "turnus";
     public static final String COLNAME_PAUSEN = "pausen";
     public static final String COLNAME_SAVEDEVENTS = "savedEvents";
-
+    public static final String COLNAME_DATE = "date";
     public  static final int DATABASE_VERSION = 1;
     public static  final String DATABASE_NAME = "TodoSport.db";
 
@@ -37,6 +39,8 @@ public class ToDoDB  extends SQLiteOpenHelper{
                     COLNAME_PAUSEN + " TINYINT(1)," +
                     COLNAME_SAVEDEVENTS + " TEXT" + ")";
 
+
+
     private static final String TABLE_TODO_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
     public ToDoDB(Context context) {
@@ -45,9 +49,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         db.execSQL(SQL_CREATE_ENTRIES);
-
     }
 
     @Override
@@ -145,10 +147,42 @@ public class ToDoDB  extends SQLiteOpenHelper{
             values.put(COLNAME_TURNUS, turnus);
             values.put(COLNAME_ISDONE, erledigt);
             values.put(COLNAME_SAVEDEVENTS, savedEvents);
-
             rowId = database.insert(TABLE_NAME, null, values);
+
+            database.execSQL("CREATE TABLE " + name + " (" + "anzahl TINYINT(1)," +
+                    COLNAME_DATE + " DATETIME DEFAULT CURRENT_DATE" + ")");
+
         } finally {
             database.close();
+        }
+    }
+
+    public List<String> readDate(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        //String nameAufgabe = new String();
+
+        try {
+
+            ArrayList<String> dates = new ArrayList<>();
+
+            Cursor cursor = db.query("La", new String[] {COLNAME_DATE, "anzahl"},
+                    null, null, null, null, null);
+
+            try {
+                while (cursor.moveToNext()) {
+                    String date = cursor.getString(0);
+                    Log.d("MEINLOGdate", date);
+                    dates.add(date);
+                }
+
+                return dates;
+
+            } finally {
+                cursor.close();
+            }
+
+        } finally {
+            db.close();
         }
     }
 
@@ -157,10 +191,12 @@ public class ToDoDB  extends SQLiteOpenHelper{
 
         try {
             ContentValues values = new ContentValues();
+            ContentValues values2 = new ContentValues();
             values.put(COLNAME_ISDONE, 1);
+            values2.put("anzahl", 1);
             String whereClause = _ID + " = ?";
             String[] whereArgs = { id };
-
+            database.insert("La", null, values2);
             return database.update(TABLE_NAME, values, whereClause, whereArgs);
 
         } finally {

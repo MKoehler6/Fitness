@@ -43,6 +43,7 @@ public class Aufgabe {
     public int gibTurnus(){
         return turnus;
     }
+    public int gibPausen() { return pausen; }
 
     public String gibAnzahlInWoche() {
         String[] arrEvents = events.split(";");
@@ -88,15 +89,16 @@ public class Aufgabe {
         return String.valueOf(zaehler);
     }
 
-    public String gibStartDatum() {
+    public String gibLetztesDatum() {
         String[] arrEvents = events.split(";");
-        return arrEvents[0];
+        String letztesDatum = arrEvents[arrEvents.length -1];
+        return letztesDatum;
     }
 
     public int tageVergangen() {
-        String dtStart = gibStartDatum() + " 00 00 00";
+        String dtStart = gibLetztesDatum() + " 00 00 00";
         int tage = 0;
-        SimpleDateFormat format = new SimpleDateFormat("dd MM yy HH mm ss");
+        SimpleDateFormat format = new SimpleDateFormat("F ww MM yy HH mm ss");
         try {
             Date date = format.parse(dtStart);
             tage = (int) ((aktDatum.getTime() - date.getTime())/1000/60/60/24);

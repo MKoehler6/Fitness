@@ -42,8 +42,8 @@ public class Heute extends Fragment {
         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
         SharedPreferences.Editor editor2 = sharedPreferences2.edit();
         SharedPreferences.Editor editor3 = sharedPreferences3.edit();
-        //int savedTag = sharedPreferences1.getInt(PREF_TAG, 0);
-        int savedTag = 22;
+        int savedTag = sharedPreferences1.getInt(PREF_TAG, 0);
+        savedTag = 21;
         int savedMonat = sharedPreferences2.getInt(PREF_MONAT, 0);
         int savedWoche = sharedPreferences3.getInt(PREF_WOCHE, 0);
         if (savedTag == 0 | savedMonat == 0 | savedWoche == 0) {
@@ -64,13 +64,16 @@ public class Heute extends Fragment {
             for (int i=0; i < aufgaben.size(); i++) {
                 int tage = aufgaben.get(i).tageVergangen();
                 Log.d("MEINLOG", " " + tage);
-                if (tage % 4 == 0 & aufgaben.get(i).gibPausenString() == "3") {
+                if (tage == 4 & aufgaben.get(i).pausen == 3) {
                     toDoDB.setUndone(aufgaben.get(i).gibIDString());
                 }
-                if (tage % 3 == 0 & aufgaben.get(i).gibPausenString() == "2") {
+                if (tage == 3 & aufgaben.get(i).pausen == 2) {
                     toDoDB.setUndone(aufgaben.get(i).gibIDString());
                 }
-                if (tage % 2 == 0 & aufgaben.get(i).gibPausenString() == "1") {
+                if (tage == 2 & aufgaben.get(i).pausen == 1) {
+                    toDoDB.setUndone(aufgaben.get(i).gibIDString());
+                }
+                if (tage > 4) {
                     toDoDB.setUndone(aufgaben.get(i).gibIDString());
                 }
             }

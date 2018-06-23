@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
 
 public class Datum {
 
-    private int woche, monat, tag, tagInWoche, jahr;
+    private int woche, monat, tag, tagInWoche, jahr, tagInJahr;
 
     Datum() {
         GregorianCalendar aktDatum = new GregorianCalendar();
@@ -22,6 +22,7 @@ public class Datum {
         tag = aktDatum.get(Calendar.DAY_OF_MONTH);
         tagInWoche = aktDatum.get(Calendar.DAY_OF_WEEK);
         jahr = aktDatum.get(Calendar.YEAR);
+        tagInJahr = aktDatum.get(Calendar.DAY_OF_YEAR);
     }
 
     Datum(int jahr, int monat, int tag, int tagInWoche) {
@@ -43,9 +44,13 @@ public class Datum {
         return tag;
     }
 
-    int gibTagInWoche() { return tagInWoche; }
+    int gibTagInWoche() {
+        if (tagInWoche == 1) { tagInWoche = 8; }
+        return tagInWoche - 1; }
 
     int gibJahr() { return jahr % 100; }
+
+    int gibTagInJahr() { return tagInJahr; }
 
     String gibWocheString() {
         return ((Integer)woche).toString();
@@ -59,6 +64,6 @@ public class Datum {
     String gibMonatString() {
         return ((Integer)gibMonat()).toString();
     }
-    String gibTagInWocheString() { return ((Integer)tagInWoche).toString();
+    String gibTagInWocheString() { return ((Integer) gibTagInWoche()).toString();
     }
 }

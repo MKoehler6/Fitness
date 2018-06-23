@@ -2,11 +2,15 @@ package com.example.micha.todo;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -73,19 +77,24 @@ public class AufgabenAdapter extends RecyclerView.Adapter {
             mItemText5.setText(toDoDB.readAufgabeAlle().get(position).gibAnzahlInWoche());
             mItemText6.setText(toDoDB.readAufgabeAlle().get(position).gibAnzahlInMonat());
             mItemText7.setText(toDoDB.readAufgabeAlle().get(position).gibAnzahlInJahr());
+            List<String> test = toDoDB.readDate();
+            Log.d("MEINLOGlisteLaenge", "" + test.size());
+            for (int i = 0; i < test.size(); i++) {
+                Log.d("MEINLOGArrayList", i + " " + test.get(i));
+            }
         }
 
 
         public void onClick(View view) {
-            String id = toDoDB.readAufgabeAlle().get(getPosition()).gibIDString();
+            String id = toDoDB.readAufgabeAlle().get(getAdapterPosition()).gibIDString();
             toDoDB.setUndone(id);
-            notifyItemChanged(getPosition());
+            notifyItemChanged(getAdapterPosition());
         }
         public boolean onLongClick(View view) {
-            String id = toDoDB.readAufgabeAlle().get(getPosition()).gibIDString();
+            String id = toDoDB.readAufgabeAlle().get(getAdapterPosition()).gibIDString();
             toDoDB.delete(id);
             Toast.makeText(context, R.string.deleted, Toast.LENGTH_SHORT).show();
-            notifyItemRemoved(getPosition());
+            notifyItemRemoved(getAdapterPosition());
             return true;
         }
     }
