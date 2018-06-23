@@ -1,7 +1,10 @@
 package com.example.micha.todo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Date;
 
 /**
  * Created by Michael on 09.12.2017.
@@ -15,7 +18,7 @@ public class Aufgabe {
     int pausen;
     int erledigt;
     String events;
-    LocalDate startDatum;
+    Date aktDatum;
 
     public Aufgabe (int id, String name, int pausen, int turnus, int erledigt, String events){
         this.id = id;
@@ -24,7 +27,7 @@ public class Aufgabe {
         this.pausen = pausen;
         this.erledigt = erledigt;
         this.events = events;
-
+        aktDatum = new Date();
     }
 
     public String gibName(){
@@ -85,18 +88,22 @@ public class Aufgabe {
         return String.valueOf(zaehler);
     }
 
-    public LocalDate gibStartDatum() {
+    public String gibStartDatum() {
         String[] arrEvents = events.split(";");
-        String[] s = arrEvents[0].split(" ");
-        int jahr = (Integer.parseInt(s[2]));
-        int monat = (Integer.parseInt(s[1]));
-        int tag = (Integer.parseInt(s[0]));
-        startDatum = LocalDate.of(jahr, monat, tag);
-        return startDatum;
+        return arrEvents[0];
     }
 
     public int tageVergangen() {
-        int tage = Period.between(gibStartDatum(), LocalDate.now()).getDays();
+        String dtStart = gibStartDatum() + " 00 00 00";
+        int tage = 0;
+        SimpleDateFormat format = new SimpleDateFormat("dd MM yy HH mm ss");
+        try {
+            Date date = format.parse(dtStart);
+            tage = (int) ((aktDatum.getTime() - date.getTime())/1000/60/60/24);
+            return tage;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return tage;
     }
 

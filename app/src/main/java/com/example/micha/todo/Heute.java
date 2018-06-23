@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,7 +42,8 @@ public class Heute extends Fragment {
         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
         SharedPreferences.Editor editor2 = sharedPreferences2.edit();
         SharedPreferences.Editor editor3 = sharedPreferences3.edit();
-        int savedTag = sharedPreferences1.getInt(PREF_TAG, 0);
+        //int savedTag = sharedPreferences1.getInt(PREF_TAG, 0);
+        int savedTag = 22;
         int savedMonat = sharedPreferences2.getInt(PREF_MONAT, 0);
         int savedWoche = sharedPreferences3.getInt(PREF_WOCHE, 0);
         if (savedTag == 0 | savedMonat == 0 | savedWoche == 0) {
@@ -61,6 +63,7 @@ public class Heute extends Fragment {
             toDoDB.setDailyUndone();
             for (int i=0; i < aufgaben.size(); i++) {
                 int tage = aufgaben.get(i).tageVergangen();
+                Log.d("MEINLOG", " " + tage);
                 if (tage % 4 == 0 & aufgaben.get(i).gibPausenString() == "3") {
                     toDoDB.setUndone(aufgaben.get(i).gibIDString());
                 }
@@ -75,7 +78,6 @@ public class Heute extends Fragment {
 
         View view = inflater.inflate(R.layout.activity_heute, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.RecyclerAufgabenListeHeute);
-
         AufgabenHeuteAdapter adapter = new AufgabenHeuteAdapter(toDoDB);
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
