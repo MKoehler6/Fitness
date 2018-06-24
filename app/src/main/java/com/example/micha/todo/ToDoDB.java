@@ -259,7 +259,6 @@ public class ToDoDB  extends SQLiteOpenHelper{
             String[] whereArgs = { id };
             database.execSQL("DROP TABLE IF EXISTS " + name);
             return database.delete(TABLE_NAME, whereClause, whereArgs);
-
         } finally {
             database.close();
         }

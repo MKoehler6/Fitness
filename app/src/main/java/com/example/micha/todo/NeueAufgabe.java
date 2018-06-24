@@ -159,7 +159,6 @@ public class NeueAufgabe extends Fragment {
         });
 
         return view;
-
     }
 
     public static void hideKeyboardFrom(Context context, View view) {

@@ -43,7 +43,7 @@ public class Heute extends Fragment {
         SharedPreferences.Editor editor2 = sharedPreferences2.edit();
         SharedPreferences.Editor editor3 = sharedPreferences3.edit();
         int savedTag = sharedPreferences1.getInt(PREF_TAG, 0);
-        savedTag = 21;
+        //savedTag = 21;
         int savedMonat = sharedPreferences2.getInt(PREF_MONAT, 0);
         int savedWoche = sharedPreferences3.getInt(PREF_WOCHE, 0);
         if (savedTag == 0 | savedMonat == 0 | savedWoche == 0) {

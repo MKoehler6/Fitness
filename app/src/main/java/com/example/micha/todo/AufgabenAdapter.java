@@ -79,7 +79,6 @@ public class AufgabenAdapter extends RecyclerView.Adapter {
             mItemText7.setText(toDoDB.readAufgabeAlle().get(position).gibAnzahlInJahr());
         }
 
-
         public void onClick(View view) {
             String id = toDoDB.readAufgabeAlle().get(getAdapterPosition()).gibIDString();
             toDoDB.setUndone(id);

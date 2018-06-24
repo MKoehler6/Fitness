@@ -76,7 +76,6 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
         public void onClick(View view) {
             String id = toDoDB.readAufgabeUnerledigt().get(getAdapterPosition()).gibIDString();
             String name = toDoDB.readAufgabeUnerledigt().get(getAdapterPosition()).name;
-
             String alt = toDoDB.readAufgabeUnerledigt().get(getAdapterPosition()).events;
             String dateNeu = alt + ";" + datum.gibTagInWocheString() + " " + datum.gibWocheString() + " " + datum.gibMonatString() + " " + datum.gibJahrString();
             toDoDB.setDate(id, dateNeu);
