@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * Created by micha on 24.01.2018.
  */
@@ -73,12 +75,18 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
 
         public void onClick(View view) {
             String id = toDoDB.readAufgabeUnerledigt().get(getAdapterPosition()).gibIDString();
+            String name = toDoDB.readAufgabeUnerledigt().get(getAdapterPosition()).name;
 
             String alt = toDoDB.readAufgabeUnerledigt().get(getAdapterPosition()).events;
             String dateNeu = alt + ";" + datum.gibTagInWocheString() + " " + datum.gibWocheString() + " " + datum.gibMonatString() + " " + datum.gibJahrString();
             toDoDB.setDate(id, dateNeu);
-            toDoDB.setDone(id);
+            toDoDB.setDone(id, name);
             notifyItemRemoved(getAdapterPosition());
+
+            List<String> test = toDoDB.readDate(name);
+            for (int i = 0; i < test.size(); i++) {
+                Log.d("MEINLOGArrayList", name + i + " " + test.get(i));
+            }
         }
     }
 }

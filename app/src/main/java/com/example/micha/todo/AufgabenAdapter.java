@@ -77,11 +77,6 @@ public class AufgabenAdapter extends RecyclerView.Adapter {
             mItemText5.setText(toDoDB.readAufgabeAlle().get(position).gibAnzahlInWoche());
             mItemText6.setText(toDoDB.readAufgabeAlle().get(position).gibAnzahlInMonat());
             mItemText7.setText(toDoDB.readAufgabeAlle().get(position).gibAnzahlInJahr());
-            List<String> test = toDoDB.readDate();
-            Log.d("MEINLOGlisteLaenge", "" + test.size());
-            for (int i = 0; i < test.size(); i++) {
-                Log.d("MEINLOGArrayList", i + " " + test.get(i));
-            }
         }
 
 
@@ -92,7 +87,8 @@ public class AufgabenAdapter extends RecyclerView.Adapter {
         }
         public boolean onLongClick(View view) {
             String id = toDoDB.readAufgabeAlle().get(getAdapterPosition()).gibIDString();
-            toDoDB.delete(id);
+            String name = toDoDB.readAufgabeAlle().get(getAdapterPosition()).name;
+            toDoDB.delete(id, name);
             Toast.makeText(context, R.string.deleted, Toast.LENGTH_SHORT).show();
             notifyItemRemoved(getAdapterPosition());
             return true;

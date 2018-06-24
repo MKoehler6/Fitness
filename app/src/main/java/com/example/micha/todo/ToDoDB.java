@@ -25,6 +25,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
     public static final String COLNAME_PAUSEN = "pausen";
     public static final String COLNAME_SAVEDEVENTS = "savedEvents";
     public static final String COLNAME_DATE = "date";
+    public static final String COLNAME_ANZAHL = "anzahl";
     public  static final int DATABASE_VERSION = 1;
     public static  final String DATABASE_NAME = "TodoSport.db";
 
@@ -149,7 +150,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
             values.put(COLNAME_SAVEDEVENTS, savedEvents);
             rowId = database.insert(TABLE_NAME, null, values);
 
-            database.execSQL("CREATE TABLE " + name + " (" + "anzahl TINYINT(1)," +
+            database.execSQL("CREATE TABLE " + name + " (" + COLNAME_ANZAHL + " TINYINT(1)," +
                     COLNAME_DATE + " DATETIME DEFAULT CURRENT_DATE" + ")");
 
         } finally {
@@ -157,7 +158,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
         }
     }
 
-    public List<String> readDate(){
+    public List<String> readDate(String name){
         SQLiteDatabase db = this.getReadableDatabase();
         //String nameAufgabe = new String();
 
@@ -165,13 +166,12 @@ public class ToDoDB  extends SQLiteOpenHelper{
 
             ArrayList<String> dates = new ArrayList<>();
 
-            Cursor cursor = db.query("La", new String[] {COLNAME_DATE, "anzahl"},
+            Cursor cursor = db.query(name, new String[] {COLNAME_DATE, COLNAME_ANZAHL},
                     null, null, null, null, null);
 
             try {
                 while (cursor.moveToNext()) {
                     String date = cursor.getString(0);
-                    Log.d("MEINLOGdate", date);
                     dates.add(date);
                 }
 
@@ -186,17 +186,17 @@ public class ToDoDB  extends SQLiteOpenHelper{
         }
     }
 
-    public int setDone(String id) {
+    public int setDone(String id, String name) {
         SQLiteDatabase database = this.getWritableDatabase();
 
         try {
             ContentValues values = new ContentValues();
             ContentValues values2 = new ContentValues();
             values.put(COLNAME_ISDONE, 1);
-            values2.put("anzahl", 1);
+            values2.put(COLNAME_ANZAHL, 1);
             String whereClause = _ID + " = ?";
             String[] whereArgs = { id };
-            database.insert("La", null, values2);
+            database.insert(name, null, values2);
             return database.update(TABLE_NAME, values, whereClause, whereArgs);
 
         } finally {
@@ -250,14 +250,14 @@ public class ToDoDB  extends SQLiteOpenHelper{
         }
     }
 
-    public int delete(String id) {
+    public int delete(String id, String name) {
 
         SQLiteDatabase database = this.getWritableDatabase();
 
         try {
             String whereClause = _ID + " = ?";
             String[] whereArgs = { id };
-
+            database.execSQL("DROP TABLE IF EXISTS " + name);
             return database.delete(TABLE_NAME, whereClause, whereArgs);
 
         } finally {
