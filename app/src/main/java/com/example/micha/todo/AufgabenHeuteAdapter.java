@@ -81,11 +81,6 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
             toDoDB.setDate(id, dateNeu);
             toDoDB.setDone(id, name);
             notifyItemRemoved(getAdapterPosition());
-
-            List<String> test = toDoDB.readDate(name);
-            for (int i = 0; i < test.size(); i++) {
-                Log.d("MEINLOGArrayList", name + i + " " + test.get(i));
-            }
         }
     }
 }

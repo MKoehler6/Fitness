@@ -39,10 +39,7 @@ public class NeueAufgabe extends Fragment {
     int pause = 0;
 
     Datum datum = new Datum();
-    int tag = datum.gibTag();
-    int monat = datum.gibMonat();
-    int jahr = datum.gibJahr();
-    String aktDatum = "" + tag + " " + monat + " " + jahr;
+    String aktDatum = datum.gibTagInWocheString() + " " + datum.gibWocheString() + " " + datum.gibMonatString() + " " + datum.gibJahrString();
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
