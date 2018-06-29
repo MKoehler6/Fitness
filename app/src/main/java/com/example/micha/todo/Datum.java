@@ -1,5 +1,7 @@
 package com.example.micha.todo;
 
+import android.util.Log;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,9 +16,10 @@ import java.util.GregorianCalendar;
 public class Datum {
 
     private int woche, monat, tag, tagInWoche, jahr, tagInJahr;
+    GregorianCalendar aktDatum;
 
     Datum() {
-        GregorianCalendar aktDatum = new GregorianCalendar();
+        aktDatum = new GregorianCalendar();
         woche = aktDatum.get(Calendar.WEEK_OF_YEAR);
         monat = aktDatum.get(Calendar.MONTH);
         tag = aktDatum.get(Calendar.DAY_OF_MONTH);
@@ -65,5 +68,8 @@ public class Datum {
         return ((Integer)gibMonat()).toString();
     }
     String gibTagInWocheString() { return ((Integer) gibTagInWoche()).toString();
+    }
+    Date gibAktuellesDatum() {
+        return aktDatum.getTime();
     }
 }

@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,7 +45,7 @@ public class Heute extends Fragment {
         SharedPreferences.Editor editor2 = sharedPreferences2.edit();
         SharedPreferences.Editor editor3 = sharedPreferences3.edit();
         int savedTag = sharedPreferences1.getInt(PREF_TAG, 0);
-        //savedTag = 21;
+        savedTag = 28;
         int savedMonat = sharedPreferences2.getInt(PREF_MONAT, 0);
         int savedWoche = sharedPreferences3.getInt(PREF_WOCHE, 0);
         if (savedTag == 0 | savedMonat == 0 | savedWoche == 0) {
@@ -57,13 +59,23 @@ public class Heute extends Fragment {
             savedMonat = sharedPreferences2.getInt(PREF_MONAT, 0);
             savedWoche = sharedPreferences3.getInt(PREF_WOCHE, 0);
         }
+
         if (savedTag != tag | savedMonat != monat) {
             editor1.putInt(PREF_TAG, tag);
             editor1.commit();
             toDoDB.setDailyUndone();
             for (int i=0; i < aufgaben.size(); i++) {
-                int tage = aufgaben.get(i).tageVergangen();
-                Log.d("MEINLOG", " " + tage);
+                ArrayList<String> dates = toDoDB.readDate(aufgaben.get(i).name);
+                String lastDate = dates.get(dates.size()-1);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                int tage = 10;
+                try {
+                    Date date = format.parse(lastDate);
+                    tage = (int) ((datum.gibAktuellesDatum().getTime() - date.getTime())/1000/60/60/24);
+                    Log.d("MEINLOGtage", " lastDate " + date + " heute " + datum.gibAktuellesDatum() + " Tage vergangen: " + tage + " " + aufgaben.get(i).name);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 if (tage == 4 & aufgaben.get(i).pausen == 3) {
                     toDoDB.setUndone(aufgaben.get(i).gibIDString());
                 }

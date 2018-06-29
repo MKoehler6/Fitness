@@ -158,7 +158,7 @@ public class ToDoDB  extends SQLiteOpenHelper{
         }
     }
 
-    public List<String> readDate(String name){
+    public ArrayList<String> readDate(String name){
         SQLiteDatabase db = this.getReadableDatabase();
         //String nameAufgabe = new String();
 
