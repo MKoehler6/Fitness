@@ -8,7 +8,7 @@
     <string name="heute">Heute</string>
     <string name="neue_aufgabe">Neue Aufgabe</string>
     <string name="liste">Liste</string>
-    <string name="name_aufgabe">Name Aufgabe</string>
+    <string name="name_aufgabe">Name Aufgabe (Ohne Leerzeichen)</string>
     <string name="turnus">Turnus:</string>
     <string name="taeglich">täglich</string>
     <string name="_1d_pause"> 1d Pause</string>

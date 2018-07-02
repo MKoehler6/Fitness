@@ -2,6 +2,7 @@ package com.example.micha.todo;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,12 +20,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.micha.todo.MainActivity.bild;
+
 public class Heute extends Fragment {
 
     static String PREF_TAG = "tag";
     static String PREF_MONAT = "monat";
     static String PREF_WOCHE = "woche";
-     List<Aufgabe> aufgaben;
+    List<Aufgabe> aufgaben;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -45,7 +48,7 @@ public class Heute extends Fragment {
         SharedPreferences.Editor editor2 = sharedPreferences2.edit();
         SharedPreferences.Editor editor3 = sharedPreferences3.edit();
         int savedTag = sharedPreferences1.getInt(PREF_TAG, 0);
-        //savedTag = 28;
+        //savedTag = 4;
         int savedMonat = sharedPreferences2.getInt(PREF_MONAT, 0);
         int savedWoche = sharedPreferences3.getInt(PREF_WOCHE, 0);
         if (savedTag == 0 | savedMonat == 0 | savedWoche == 0) {
@@ -59,10 +62,13 @@ public class Heute extends Fragment {
             savedMonat = sharedPreferences2.getInt(PREF_MONAT, 0);
             savedWoche = sharedPreferences3.getInt(PREF_WOCHE, 0);
         }
-
+        Log.d("MEINLOGsavedTagundMonat: ", "" + savedTag + " " + tag);
+        Log.d("MEINLOGsavedMonatundMonat: ", "" + savedMonat + " " + monat);
         if (savedTag != tag | savedMonat != monat) {
             editor1.putInt(PREF_TAG, tag);
             editor1.commit();
+            editor2.putInt(PREF_MONAT, monat);
+            editor2.commit();
             toDoDB.setDailyUndone();
             for (int i=0; i < aufgaben.size(); i++) {
                 ArrayList<String> dates = toDoDB.readDate(aufgaben.get(i).name);
@@ -97,7 +103,12 @@ public class Heute extends Fragment {
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
+        if (toDoDB.readAufgabeUnerledigt().size() == 0) {
+            bild.setVisibility(View.VISIBLE);
+            Log.d("MEINLOGneueActivity: ", " wird aufgerufen");
+        } else {
+            bild.setVisibility(View.INVISIBLE);
+        }
         return view;
     }
 }

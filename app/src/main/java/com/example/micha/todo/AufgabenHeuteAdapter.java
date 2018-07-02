@@ -1,5 +1,7 @@
 package com.example.micha.todo;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -81,6 +83,12 @@ public class AufgabenHeuteAdapter extends RecyclerView.Adapter {
             toDoDB.setDate(id, dateNeu);
             toDoDB.setDone(id, name);
             notifyItemRemoved(getAdapterPosition());
+            if (toDoDB.readAufgabeUnerledigt().size() == 0) {
+                MainActivity.bild.setVisibility(View.VISIBLE);
+                Log.d("MEINLOGneueActivity: ", " wird aufgerufen");
+            } else {
+                MainActivity.bild.setVisibility(View.INVISIBLE);
+            }
         }
     }
 }
